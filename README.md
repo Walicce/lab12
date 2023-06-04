@@ -38,6 +38,7 @@ wyświetlania stron internetowych opartych na PHP.
 
 
 
-Uruchomienie:  docker-compose up -d
+Uruchomienie:  docker-compose up 
+
 <img width="569" alt="Zrzut ekranu 2023-06-4 o 14 53 21" src="https://github.com/Walicce/lab12/assets/60614660/bc079a37-2624-4dbe-9890-2798f7dcd5c4">
 

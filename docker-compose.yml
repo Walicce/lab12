@@ -1,0 +1,37 @@
+version: '3'  # Wersja składni Docker Compose, używamy wersji 3
+
+services:
+  nginx:
+    build: ./nginx  # Budowanie obrazu Nginx z katalogu ./nginx
+    ports:
+      - 6666:80  # Przekierowanie portu 6666 hosta na port 80 kontenera Nginx
+    networks:
+      - backend  # Podłączenie do sieci backend
+      - frontend  # Podłączenie do sieci frontend
+
+  php:
+    build: ./php  # Budowanie obrazu PHP-FPM z katalogu ./php
+    networks:
+      - backend  # Podłączenie do sieci backend
+
+  mysql:
+    build: ./mysql  # Budowanie obrazu MySQL z katalogu ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword  # Ustawienie hasła dla użytkownika root MySQL
+    networks:
+      - backend  # Podłączenie do sieci backend
+
+  phpmyadmin:
+    build: ./phpmyadmin  # Budowanie obrazu phpMyAdmin z katalogu ./phpmyadmin
+    environment:
+      - PMA_HOST=mysql  # Ustawienie hosta dla phpMyAdmin (łączy się z kontenerem MySQL)
+      - PMA_PORT=3306  # Ustawienie portu dla phpMyAdmin (łączy się z portem 3306 MySQL)
+    ports:
+      - 6001:80  # Przekierowanie portu 6001 hosta na port 80 kontenera phpMyAdmin
+    networks:
+      - backend  # Podłączenie do sieci backend
+      - frontend  # Podłączenie do sieci frontend
+
+networks:
+  backend:  # Definicja sieci backend
+  frontend:  # Definicja sieci frontend
